@@ -41,7 +41,10 @@
         "prepareChangelog": "standard-version --prerelease",
         "watch": "jest --watch",
         "validate:dependencies": "yarn audit && yarn license-validate",
-        "license-validate": "node-license-validator -p -d --allow-licenses MIT MIT/X11 BSD BSD-3-Clause BSD-2-Clause ISC Apache Apache-2.0 WTFPL CC-BY-3.0 CC0-1.0 Unlicense --allow-packages cycle"
+        "license-validate": "node-license-validator -p -d --allow-licenses MIT MIT/X11 BSD BSD-3-Clause BSD-2-Clause ISC Apache Apache-2.0 WTFPL CC-BY-3.0 CC0-1.0 Unlicense --allow-packages cycle",
+        "lint": "eslint . --ext .js,.ts",
+        "lint:fix": "yarn lint -- --fix",
+        "eslint": "eslint ./"
     },
     "dependencies": {
         "casparcg-connection": "^4.9.0",
@@ -82,12 +85,19 @@
         "@types/react-select": "^3.0.4",
         "@types/react-test-renderer": "^16.9.1",
         "@types/socket.io-client": "^1.4.32",
+        "@typescript-eslint/eslint-plugin": "^2.29.0",
+        "@typescript-eslint/parser": "^2.29.0",
         "babel-jest": "^25.1.0",
         "babel-loader": "^8.0.6",
         "css-loader": "^3.4.2",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
         "file-loader": "^4.2.0",
         "html-webpack-plugin": "^3.2.0",
+        "husky": "^4.2.5",
         "jest": "^25.1.0",
+        "lint-staged": "^10.1.7",
         "node-license-validator": "^1.3.0",
         "react-test-renderer": "^16.13.0",
         "style-loader": "^1.0.1",
@@ -100,5 +110,18 @@
     },
     "resolutions": {
         "minimist": "^1.2.5"
-    }
+		},
+		"husky": {
+			"hooks": {
+				"pre-commit": "lint-staged"
+			}
+		},
+		"lint-staged": {
+			"*.{js,json,md}": [
+				"prettier --write"
+			],
+			"*.{ts}": [
+				"yarn lint:fix --"
+			]
+		}
 }
