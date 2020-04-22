@@ -24,7 +24,7 @@ export const socketClientHandlers = () => {
         }
     ))
     .on(SOCKET_SET_FULL_STORE, (
-        (payload: any) => { 
+        (payload: any) => {
             // console.log('STATE RECEIVED :', payload)
 
             let numberOfChannels: number[] = []
@@ -55,7 +55,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on('set-settings', (
-        (payload: any) => { 
+        (payload: any) => {
             // console.log('SETTINGS RECEIVED :', payload)
             window.storeRedux.dispatch({
                 type: UPDATE_SETTINGS,
@@ -64,7 +64,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on('set-mixerprotocol', (
-        (payload: any) => { 
+        (payload: any) => {
             // console.log('MIXERPROTOCOL RECEIVED :', payload)
             window.mixerProtocol = payload.mixerProtocol
             window.mixerProtocolPresets = payload.mixerProtocolPresets
@@ -72,7 +72,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on(SOCKET_SET_STORE_FADER, (
-        (payload: any) => { 
+        (payload: any) => {
             window.storeRedux.dispatch({
                 type:SET_SINGLE_FADER_STATE,
                 faderIndex: payload.faderIndex,
@@ -81,7 +81,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on(SOCKET_SET_STORE_CHANNEL, (
-        (payload: any) => { 
+        (payload: any) => {
             window.storeRedux.dispatch({
                 type:SET_SINGLE_CH_STATE,
                 channelIndex: payload.channelIndex,
@@ -90,7 +90,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on(SOCKET_SET_VU, (
-        (payload: any) => { 
+        (payload: any) => {
             window.storeRedux.dispatch({
                 type:SET_VU_LEVEL,
                 channel: payload.faderIndex,
@@ -99,7 +99,7 @@ export const socketClientHandlers = () => {
         })
     )
     .on(SOCKET_SET_VU_REDUCTION, (
-        (payload: any) => { 
+        (payload: any) => {
             window.storeRedux.dispatch({
                 type:SET_VU_REDUCTION_LEVEL,
                 channel: payload.faderIndex,
@@ -108,12 +108,12 @@ export const socketClientHandlers = () => {
         })
     )
     .on(SOCKET_RETURN_SNAPSHOT_LIST, (
-        (payload: any) => { 
+        (payload: any) => {
             window.snapshotFileList = payload
         })
     )
     .on(SOCKET_RETURN_CCG_LIST, (
-        (payload: any) => { 
+        (payload: any) => {
             window.ccgFileList = payload
         })
     )
