@@ -36,7 +36,7 @@ export const saveSettings = (settings: any) => {
 export const loadSnapshotState = (stateSnapshot: any, stateChannelSnapshot: any, numberOfChannels: Array<number>, numberOfFaders: number, fileName: string, loadAll: boolean) => {
     try {
         const stateFromFile = JSON.parse(fs.readFileSync(fileName));
-        
+
         if (loadAll) {
             store.dispatch({
                 type: SET_COMPLETE_CH_STATE,
@@ -75,7 +75,7 @@ export const loadSnapshotState = (stateSnapshot: any, stateChannelSnapshot: any,
             });
 
         }
-        
+
     }
     catch (error) {
         logger.error("Error loading Snapshot" + String(error), {})
@@ -94,7 +94,7 @@ export const saveSnapshotState = (stateSnapshot: any, fileName: string) => {
 }
 
 export const getSnapShotList = () => {
-    const files = fs.readdirSync(path.resolve('storage')).filter((file: string) => { 
+    const files = fs.readdirSync(path.resolve('storage')).filter((file: string) => {
         if (file.includes('.shot') && file !== 'default.shot') {
             return true
         }
@@ -103,7 +103,7 @@ export const getSnapShotList = () => {
 }
 
 export const getCcgSettingsList = () => {
-    const files = fs.readdirSync(path.resolve('storage')).filter((file: string) => { 
+    const files = fs.readdirSync(path.resolve('storage')).filter((file: string) => {
         if (file.includes('.ccg') && file !== 'default-casparcg.ccg') {
             return true
         }
@@ -120,7 +120,7 @@ export const setCcgDefault = (fileName: string) => {
         logger.error('Couldn´t read ' + fileName + ' file', {})
         return
     }
-    
+
     const defaultFile = path.join('storage', 'default-casparcg.ccg')
     fs.writeFile(defaultFile, data, 'utf8', (error: any)=>{
         if (error) {

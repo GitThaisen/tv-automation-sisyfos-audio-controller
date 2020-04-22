@@ -7,7 +7,7 @@ export const StuderVistaMaster: IMixerProtocol = {
     FADE_DISPATCH_RESOLUTION: 5,
     leadingZeros: false,  //some OSC protocols needs channels to be 01, 02 etc.
     pingCommand: [{
-        mixerMessage: '7F 8F FF FE D9 5C 80 30 80 00 00 00 00', 
+        mixerMessage: '7F 8F FF FE D9 5C 80 30 80 00 00 00 00',
         value: 0,
         type: 'real',
         min: -90,
@@ -39,8 +39,8 @@ export const StuderVistaMaster: IMixerProtocol = {
             CHANNEL_MUTE_OFF: [emptyMixerMessage()]
         },
         toMixer: {
-           CHANNEL_OUT_GAIN: [{ // 7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a1 19 31 17 {a3} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {05 09 03 c0 06 13 00 00 00 00}     
-                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a1 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}', 
+           CHANNEL_OUT_GAIN: [{ // 7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a1 19 31 17 {a3} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {05 09 03 c0 06 13 00 00 00 00}
+                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a1 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}',
                 value: 0,
                 type: 'real',
                 min: -90,
@@ -108,7 +108,7 @@ export const StuderVistaMaster: IMixerProtocol = {
         },
         toMixer: {
             CHANNEL_OUT_GAIN: [{ // 7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a2 19 31 17 b9 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 05 09 03 80 03 05 00 00 00 00
-                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a2 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}', 
+                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a2 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}',
                 value: 0,
                 type: 'real',
                 min: -90,
@@ -176,7 +176,7 @@ export const StuderVistaMaster: IMixerProtocol = {
         },
         toMixer: {
             CHANNEL_OUT_GAIN: [{
-                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a3 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}', 
+                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a1 25 31 23 a1 21 31 1f a1 1d 31 1b a3 19 31 17 {channel} 15 31 13 a1 11 31 0f a2 0d 31 0b e1 09 31 07 63 {level}',
                 value: 0,
                 type: 'real',
                 min: -90,

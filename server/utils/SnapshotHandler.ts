@@ -1,6 +1,6 @@
 //Utils:
 import { loadSnapshotState, saveSnapshotState } from './SettingsStorage';
-import { 
+import {
     mixerProtocolPresets,
 } from '../mainClasses'
 import { state } from '../reducers/store'

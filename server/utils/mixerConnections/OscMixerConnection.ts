@@ -10,7 +10,7 @@ import { IMixerProtocol } from '../../constants/MixerProtocolInterface'
 import { behringerXrMeter, behringerReductionMeter } from './productSpecific/behringerXr'
 import { midasMeter } from './productSpecific/midas'
 import { SET_OUTPUT_LEVEL, SET_AUX_LEVEL } from '../../reducers/channelActions'
-import { 
+import {
     SET_VU_LEVEL,
     SET_FADER_LEVEL,
     SET_CHANNEL_LABEL,
@@ -62,11 +62,11 @@ export class OscMixerConnection {
         .on("ready", () => {
             logger.info("Receiving state of desk", {})
             this.initialCommands()
-            
+
             store.dispatch({
                 type: SET_MIXER_ONLINE,
                 mixerOnline: true
-            });            
+            });
             global.mainThreadHandler.updateFullClientStore()
         })
         .on('message', (message: any) => {
@@ -92,7 +92,7 @@ export class OscMixerConnection {
                         level: message.args[0]
                     });
                     socketServer.emit(
-                        SOCKET_SET_VU, 
+                        SOCKET_SET_VU,
                         {
                             faderIndex: state.channels[0].channel[ch - 1].assignedFader,
                             level: message.args[0]
@@ -113,7 +113,7 @@ export class OscMixerConnection {
                         level: message.args[0]
                     });
                     socketServer.emit(
-                        SOCKET_SET_VU_REDUCTION, 
+                        SOCKET_SET_VU_REDUCTION,
                         {
                             faderIndex: state.channels[0].channel[ch - 1].assignedFader,
                             level: message.args[0]
@@ -127,7 +127,7 @@ export class OscMixerConnection {
 
 
                 if (!state.channels[0].channel[ch - 1].fadeActive)
-                    {                    
+                    {
                     if  (message.args[0] > this.mixerProtocol.fader.min + (this.mixerProtocol.fader.max * state.settings[0].autoResetLevel / 100)) {
                         store.dispatch({
                             type: SET_FADER_LEVEL,
@@ -151,7 +151,7 @@ export class OscMixerConnection {
                                 });
                             }
                         }
-                    } else if (state.faders[0].fader[assignedFaderIndex].pgmOn 
+                    } else if (state.faders[0].fader[assignedFaderIndex].pgmOn
                             || state.faders[0].fader[assignedFaderIndex].voOn)
                         {
                         store.dispatch({
@@ -174,7 +174,7 @@ export class OscMixerConnection {
                     if (huiRemoteConnection) {
                         huiRemoteConnection.updateRemoteFaderState(assignedFaderIndex, message.args[0]);
                     }
-                } 
+                }
             } else if ( this.checkOscCommand(message.address, this.mixerProtocol.channelTypes[0].fromMixer
                 .AUX_LEVEL[0].mixerMessage)){
 
@@ -199,7 +199,7 @@ export class OscMixerConnection {
                     level: message.args[0]
                 });
                 global.mainThreadHandler.updateFullClientStore()
- 
+
             } else if (this.checkOscCommand(message.address, this.mixerProtocol.channelTypes[0].fromMixer
                 .CHANNEL_NAME[0].mixerMessage)) {
                     let ch = message.address.split("/")[this.cmdChannelIndex];
@@ -212,7 +212,7 @@ export class OscMixerConnection {
             } else if (this.checkOscCommand(message.address, this.mixerProtocol.channelTypes[0].fromMixer
                 .CHANNEL_MUTE_ON[0].mixerMessage)) {
                     let ch = message.address.split("/")[this.cmdChannelIndex]
-                    let mute = (message.args[0] === 0) ? 1 : 0 
+                    let mute = (message.args[0] === 0) ? 1 : 0
                     store.dispatch({
                         type: SET_MUTE,
                         channel: state.channels[0].channel[ch - 1].assignedFader,
@@ -326,15 +326,15 @@ export class OscMixerConnection {
                                         this.sendOutRequestAux(item.mixerMessage, auxIndex +1, state.faders[0].fader[channel.assignedFader].monitor)
                                     },
                                     state.faders[0].fader[channel.assignedFader].monitor * 10 + auxIndex * 100)
-                                }  
+                                }
                             })
                         })
                     } else {
                         state.channels[0].channel.map((channel: any, index: any) => {
                             this.sendOutRequest(item.mixerMessage,(index +1));
                         });
-                    }                     
-                    
+                    }
+
                 } else {
                     this.sendOutMessage(item.mixerMessage, 1, item.value, item.type);
                 }
@@ -377,7 +377,7 @@ export class OscMixerConnection {
                 if (typeof(parseFloat(messageArray[index])) !== 'number') { status = false }
             } else if (commandPart !== messageArray[index]) {
                 status = false
-            }            
+            }
         })
         return status
     }
@@ -482,7 +482,7 @@ export class OscMixerConnection {
                 mute.value,
                 mute.type
             )
-        }    } 
+        }    }
 
     updateNextAux(channelIndex: number, level: number) {
         return true
@@ -589,7 +589,7 @@ export class OscMixerConnection {
         );
     }
 
-    
+
     updateFadeIOLevel(channelIndex: number, outputLevel: number) {
         let channelType = state.channels[0].channel[channelIndex].channelType;
         let channelTypeIndex = state.channels[0].channel[channelIndex].channelTypeIndex;

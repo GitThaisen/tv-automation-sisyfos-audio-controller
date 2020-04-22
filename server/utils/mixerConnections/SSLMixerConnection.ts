@@ -7,7 +7,7 @@ import { huiRemoteConnection } from '../../mainClasses'
 import { IMixerProtocol } from '../../constants/MixerProtocolInterface'
 import { IStore } from '../../reducers/indexReducer'
 import { SET_OUTPUT_LEVEL } from '../../reducers/channelActions'
-import { 
+import {
     SET_FADER_LEVEL,
     TOGGLE_PGM,
     SET_MUTE
@@ -61,7 +61,7 @@ export class SSLMixerConnection {
                     type: SET_MIXER_ONLINE,
                     mixerOnline: true
                 });
-                
+
                 logger.info("Receiving state of desk", {})
                 this.mixerProtocol.initializeCommands.map((item) => {
                     if (item.mixerMessage.includes("{channel}")) {
@@ -80,17 +80,17 @@ export class SSLMixerConnection {
                     type: SET_MIXER_ONLINE,
                     mixerOnline: true
                 });
-                
+
                 let buffers = []
                 let lastIndex = 0
                 for (let index=1; index<data.length; index++) {
                     if (data[index] === 241) {
                         buffers.push(data.slice(lastIndex, index - 1))
                         lastIndex = index
-                    } 
+                    }
                 }
                 if (buffers.length === 0) {
-                    buffers.push(data)  
+                    buffers.push(data)
                 }
 
                 buffers.forEach((buffer) => {
@@ -98,14 +98,14 @@ export class SSLMixerConnection {
                         lastWasAck = false
                         // FADERLEVEL COMMAND:
                         try {
-                            
-                       
+
+
                             let commandHex = buffer.toString('hex')
                             let channel = buffer[6]
                             let value = buffer.readUInt16BE(7)/1024
 
                             let assignedFaderIndex = state.channels[0].channel[channel].assignedFader
-                            if (!state.channels[0].channel[channel].fadeActive) {    
+                            if (!state.channels[0].channel[channel].fadeActive) {
                                 if (value > this.mixerProtocol.fader.min + (this.mixerProtocol.fader.max * state.settings[0].autoResetLevel / 100)) {
                                     store.dispatch({
                                         type: SET_FADER_LEVEL,
@@ -118,7 +118,7 @@ export class SSLMixerConnection {
                                             channel: assignedFaderIndex
                                         });
                                     }
-                                    
+
                                     if (huiRemoteConnection) {
                                         huiRemoteConnection.updateRemoteFaderState(assignedFaderIndex, value);
                                     }
@@ -129,7 +129,7 @@ export class SSLMixerConnection {
                                             }
                                         })
                                     }
-                                } else if (state.faders[0].fader[assignedFaderIndex].pgmOn 
+                                } else if (state.faders[0].fader[assignedFaderIndex].pgmOn
                                     || state.faders[0].fader[assignedFaderIndex].voOn)
                                 {
                                     store.dispatch({
@@ -151,8 +151,8 @@ export class SSLMixerConnection {
                             }
                         } catch (error) {
                                 logger.error('Error translating received message :' + String(error), {})
-                        } 
-                        
+                        }
+
                     } else if (buffer[1] === 5 && buffer[2] === 255 && buffer[4] === 1 && !lastWasAck) {
                         lastWasAck = false
                         // MUTE ON/OFF COMMAND
@@ -160,7 +160,7 @@ export class SSLMixerConnection {
                         let channelIndex = buffer[6]
                         let value: boolean = buffer[7] === 0 ? true : false
                         logger.verbose('Receive Buffer Channel On/off: ' + this.formatHexWithSpaces(commandHex, ' ', 2), {})
-                        
+
                         let assignedFaderIndex = state.channels[0].channel[channelIndex].assignedFader
 
                         store.dispatch({
@@ -168,7 +168,7 @@ export class SSLMixerConnection {
                             channel: assignedFaderIndex,
                             muteOn: value
                         });
-                        
+
                         if (huiRemoteConnection) {
                             huiRemoteConnection.updateRemoteFaderState(assignedFaderIndex, value ? 1 : 0);
                         }
@@ -187,7 +187,7 @@ export class SSLMixerConnection {
                     }  else {
                         lastWasAck = false
                     }
-                })    
+                })
             })
             .on('error', (error: any) => {
                 logger.error("Error : " + String(error), {})
@@ -260,7 +260,7 @@ export class SSLMixerConnection {
         if (typeof value === 'string') {
             value = parseFloat(value)
         }
-        if (value < 0) { 
+        if (value < 0) {
             value = 0
         }
         valueNumber = value * 1024
@@ -273,14 +273,14 @@ export class SSLMixerConnection {
             (channelIndex & 0x0000ff00) >> 8,
             (channelIndex & 0x000000ff),
         ])
-        
+
         sslMessage = sslMessage.replace('{channel}', ('0' + channelByte[0].toString(16)).slice(-2) + ' ' + ('0' + channelByte[1].toString(16)).slice(-2))
         sslMessage = sslMessage.replace('{level}', ('0' + valueByte[0].toString(16)).slice(-2) + ' ' + ('0' + valueByte[1].toString(16)).slice(-2) + ' ')
         sslMessage = sslMessage + this.calculate_checksum8(sslMessage.slice(9))
         let a = sslMessage.split(' ')
         let buf = new Buffer(a.map((val:string) => { return parseInt(val, 16) }))
-        
-        logger.verbose("Send HEX: " + sslMessage, {}) 
+
+        logger.verbose("Send HEX: " + sslMessage, {})
         this.SSLConnection.write(buf)
     }
 
@@ -294,8 +294,8 @@ export class SSLMixerConnection {
         sslMessage = sslMessage + ' ' + this.calculate_checksum8(sslMessage.slice(9))
         let a = sslMessage.split(' ')
         let buf = new Buffer(a.map((val:string) => { return parseInt(val, 16) }))
-        
-        logger.verbose("Send HEX: " + sslMessage, {}) 
+
+        logger.verbose("Send HEX: " + sslMessage, {})
         this.SSLConnection.write(buf)
     }
 
@@ -304,8 +304,8 @@ export class SSLMixerConnection {
         sslMessage = sslMessage + ' ' + this.calculate_checksum8(sslMessage.slice(9))
         let a = sslMessage.split(' ')
         let buf = new Buffer(a.map((val:string) => { return parseInt(val, 16) }))
-        
-        logger.verbose("Send HEX: " + sslMessage, {}) 
+
+        logger.verbose("Send HEX: " + sslMessage, {})
         this.SSLConnection.write(buf)
     }
 
@@ -357,7 +357,7 @@ export class SSLMixerConnection {
                 channelTypeIndex
             );
         }
-    } 
+    }
 
     updateFadeIOLevel(channelIndex: number, outputLevel: number) {
         let channelType = state.channels[0].channel[channelIndex].channelType;
@@ -375,11 +375,11 @@ export class SSLMixerConnection {
             channelIndex + 128,
             level
         );
-    } 
+    }
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

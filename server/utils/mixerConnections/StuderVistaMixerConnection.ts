@@ -16,10 +16,10 @@ export class StuderVistaMixerConnection {
     constructor(mixerProtocol: IMixerProtocol) {
         this.sendOutMessage = this.sendOutMessage.bind(this);
         this.pingMixerCommand = this.pingMixerCommand.bind(this);
-        
+
         this.emberNodeObject = new Array(200);
         this.mixerProtocol = mixerProtocol;
-        
+
         logger.info("Setting up Ember connection")
 
        this.socket = net.createConnection(
@@ -27,7 +27,7 @@ export class StuderVistaMixerConnection {
                 port: 8087,
                 host: "10.225.15.196",
                 timeout: 20000000
-            }, 
+            },
             () => {
 
             }
@@ -35,7 +35,7 @@ export class StuderVistaMixerConnection {
         this.socket.on('data', (data: any) => {
             // A 2 way respons is to be implemented
             logger.verbose('Ember Server data recieved')
-        })   
+        })
         .on('end',() => {
             // When connection disconnected.
             logger.info('Ember Client socket disconnect. ');
@@ -113,7 +113,7 @@ export class StuderVistaMixerConnection {
         let hexArray = levelMessage.split(' ')
         let buf = new Buffer(hexArray.map((val:string) => { return parseInt(val, 16) }))
         this.socket.write(buf)
-        logger.verbose("Send HEX: " + levelMessage) 
+        logger.verbose("Send HEX: " + levelMessage)
     }
 
     sendOutRequest(mixerMessage: string, channel: number) {
@@ -153,17 +153,17 @@ export class StuderVistaMixerConnection {
 
     updateMuteState(channelIndex: number, muteOn: boolean) {
         return true
-    } 
+    }
 
     updateNextAux(channelIndex: number, level: number) {
         return true
-    } 
+    }
 
 
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

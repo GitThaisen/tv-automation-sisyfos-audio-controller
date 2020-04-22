@@ -1,6 +1,6 @@
 import * as DEFAULTS from '../constants/DEFAULTS';
 import { MixerProtocolPresets } from '../constants/MixerProtocolPresets';
-import { 
+import {
     TOGGLE_SHOW_CHAN_STRIP,
     TOGGLE_SHOW_OPTION,
     TOGGLE_SHOW_SETTINGS,
@@ -76,7 +76,7 @@ const defaultSettingsReducerState: Array<ISettings> = [
         automationMode: true,
         offtubeMode: false,
         fadeTime: 120,
-        voFadeTime: 280, 
+        voFadeTime: 280,
         showPfl: false,
         mixerOnline: false,
         serverOnline: true

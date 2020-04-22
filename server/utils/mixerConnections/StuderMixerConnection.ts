@@ -5,9 +5,9 @@ import { huiRemoteConnection } from '../../mainClasses'
 
 //Utils:
 import { IMixerProtocol } from '../../constants/MixerProtocolInterface';
-import { 
-    SET_FADER_LEVEL, 
-    SET_CHANNEL_LABEL 
+import {
+    SET_FADER_LEVEL,
+    SET_CHANNEL_LABEL
 } from '../../reducers/faderActions'
 import { logger } from '../logger';
 
@@ -22,10 +22,10 @@ export class StuderMixerConnection {
     constructor(mixerProtocol: IMixerProtocol) {
         this.sendOutMessage = this.sendOutMessage.bind(this);
         this.pingMixerCommand = this.pingMixerCommand.bind(this);
-        
+
         this.emberNodeObject = new Array(200);
         this.mixerProtocol = mixerProtocol;
-        
+
         logger.info("Setting up Ember connection")
         this.emberConnection = new EmberClient(
             state.settings[0].deviceIp,
@@ -147,7 +147,7 @@ export class StuderMixerConnection {
 
     sendOutMessage(mixerMessage: string, channel: number, value: string | number, type: string) {
         let channelString = this.mixerProtocol.leadingZeros ? ("0"+channel).slice(-2) : channel.toString();
-        
+
         let message = mixerMessage.replace(
             "{channel}",
             channelString
@@ -190,14 +190,14 @@ export class StuderMixerConnection {
         let channelByte = new Uint8Array([
             (channelVal & 0x000000ff),
         ])
-        
+
         levelMessage = levelMessage.replace('{channel}', ('0' + channelByte[0].toString(16)).slice(-2))
         levelMessage = levelMessage.replace('{level}', ('0' + valueByte[0].toString(16)).slice(-2) + ' ' + ('0' + valueByte[1].toString(16)).slice(-2))
 
         let hexArray = levelMessage.split(' ')
         let buf = new Buffer(hexArray.map((val:string) => { return parseInt(val, 16) }))
         this.emberConnection._client.socket.write(buf)
-        logger.verbose("Send HEX: " + levelMessage) 
+        logger.verbose("Send HEX: " + levelMessage)
     }
 
     sendOutRequest(mixerMessage: string, channel: number) {
@@ -267,17 +267,17 @@ export class StuderMixerConnection {
 
     updateMuteState(channelIndex: number, muteOn: boolean) {
         return true
-    } 
+    }
 
     updateNextAux(channelIndex: number, level: number) {
         return true
-    } 
+    }
 
 
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

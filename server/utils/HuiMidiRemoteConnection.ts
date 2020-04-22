@@ -3,8 +3,8 @@ import WebMidi from 'webmidi';
 import { store, state } from '../reducers/store'
 import { mixerGenericConnection } from '../mainClasses'
 
-import { 
-    SET_FADER_LEVEL, 
+import {
+    SET_FADER_LEVEL,
     TOGGLE_PGM,
     TOGGLE_PFL
 } from  '../reducers/faderActions'
@@ -12,7 +12,7 @@ import {
 //Utils:
 import { IRemoteProtocol,
     RemoteFaderPresets,
-    MidiReceiveTypes 
+    MidiReceiveTypes
 } from '../constants/RemoteFaderPresets';
 import { MixerProtocolPresets } from '../constants/MixerProtocolPresets';
 
@@ -71,7 +71,7 @@ export class HuiMidiRemoteConnection {
                     mixerGenericConnection.updateOutLevel(message.data[1]);
                     this.updateRemoteFaderState(message.data[1], this.convertFromRemoteLevel(message.data[2]))
                 } else if (message.data[1] = 15) {
-                    
+
                     console.log("Received message (" + message.data + ").");
                     if (message.data[2]<9) {
                         //Set active channel for next midi message:

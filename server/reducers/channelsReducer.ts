@@ -1,4 +1,4 @@
-import { 
+import {
     SET_OUTPUT_LEVEL,
     SET_ASSIGNED_FADER,
     SET_COMPLETE_CH_STATE,

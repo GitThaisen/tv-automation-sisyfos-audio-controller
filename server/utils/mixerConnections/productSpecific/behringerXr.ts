@@ -23,7 +23,7 @@ export const behringerXrMeter = (message: any) => {
             level: level
         });
         socketServer.emit(
-            SOCKET_SET_VU, 
+            SOCKET_SET_VU,
             {
                 faderIndex: state.channels[0].channel[i].assignedFader,
                 level: level
@@ -35,7 +35,7 @@ export const behringerXrMeter = (message: any) => {
 export const behringerReductionMeter = (message: any) => {
 
     //Test data from Behringer:
-    //message = 
+    //message =
 
     let uint8bytes = Uint8Array.from(message[0])
     let dataview = new DataView(uint8bytes.buffer)
@@ -48,7 +48,7 @@ export const behringerReductionMeter = (message: any) => {
             level: level
         })
         socketServer.emit(
-            SOCKET_SET_VU_REDUCTION, 
+            SOCKET_SET_VU_REDUCTION,
             {
                 faderIndex: state.channels[0].channel[i].assignedFader,
                 level: level

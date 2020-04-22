@@ -5,9 +5,9 @@ import { huiRemoteConnection } from '../../mainClasses'
 
 //Utils:
 import { IMixerProtocol } from '../../constants/MixerProtocolInterface';
-import { 
-    SET_FADER_LEVEL, 
-    SET_CHANNEL_LABEL 
+import {
+    SET_FADER_LEVEL,
+    SET_CHANNEL_LABEL
 } from '../../reducers/faderActions'
 import { logger } from '../logger';
 
@@ -22,10 +22,10 @@ export class EmberMixerConnection {
     constructor(mixerProtocol: IMixerProtocol) {
         this.sendOutMessage = this.sendOutMessage.bind(this);
         this.pingMixerCommand = this.pingMixerCommand.bind(this);
-        
+
         this.emberNodeObject = new Array(200);
         this.mixerProtocol = mixerProtocol;
-        
+
         logger.info("Setting up Ember connection")
         this.emberConnection = new EmberClient(
             state.settings[0].deviceIp,
@@ -156,7 +156,7 @@ export class EmberMixerConnection {
 
     sendOutMessage(mixerMessage: string, channel: number, value: string | number, type: string) {
         let channelString = this.mixerProtocol.leadingZeros ? ("0"+channel).slice(-2) : channel.toString();
-        
+
         let message = mixerMessage.replace(
             "{channel}",
             channelString
@@ -247,17 +247,17 @@ export class EmberMixerConnection {
 
     updateMuteState(channelIndex: number, muteOn: boolean) {
         return true
-    } 
+    }
 
     updateNextAux(channelIndex: number, level: number) {
         return true
-    } 
+    }
 
 
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

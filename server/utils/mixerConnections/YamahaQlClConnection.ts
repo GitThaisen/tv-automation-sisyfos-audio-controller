@@ -7,8 +7,8 @@ import { huiRemoteConnection } from '../../mainClasses'
 //Utils:
 import { IMixerProtocol } from '../../constants/MixerProtocolInterface'
 import { SET_OUTPUT_LEVEL } from '../../reducers/channelActions'
-import { 
-    SET_VU_LEVEL, 
+import {
+    SET_VU_LEVEL,
     SET_FADER_LEVEL,
     SET_CHANNEL_LABEL,
     TOGGLE_PGM,
@@ -69,17 +69,17 @@ export class QlClMixerConnection {
                     type: SET_MIXER_ONLINE,
                     mixerOnline: true
                 });
-                
+
                 let buffers = []
                 let lastIndex = 0
                 for (let index=1; index<data.length; index++) {
                     if (data[index] === 240) {
                         buffers.push(data.slice(lastIndex, index))
                         lastIndex = index
-                    } 
+                    }
                 }
                 if (buffers.length === 0) {
-                    buffers.push(data)  
+                    buffers.push(data)
                 }
 
                 buffers.forEach((message) => {
@@ -138,7 +138,7 @@ export class QlClMixerConnection {
 
                         let value: boolean = message[16] === 0 ? true : false
                         logger.verbose('Receive Buffer Channel On/off - Channel ' + String(channelIndex + 1) + ' Val :' + String(message[16]) )
-                        
+
                         let assignedFaderIndex = state.channels[0].channel[channelIndex].assignedFader
 
                         store.dispatch({
@@ -146,7 +146,7 @@ export class QlClMixerConnection {
                             channel: assignedFaderIndex,
                             muteOn: value
                         });
-                        
+
                         if (huiRemoteConnection) {
                             huiRemoteConnection.updateRemoteFaderState(assignedFaderIndex, value ? 1 : 0);
                         }
@@ -205,7 +205,7 @@ export class QlClMixerConnection {
         if (typeof value === 'string') {
             value = parseFloat(value)
         }
-        
+
         valueNumber = value * 2048
         let valueByte = new Uint8Array([
             (valueNumber & 0xff00) >> 8,
@@ -282,15 +282,15 @@ export class QlClMixerConnection {
                 ''
             );
         }
-    } 
-    
+    }
+
     updateNextAux(channelIndex: number, level: number) {
         return true
-    } 
+    }
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

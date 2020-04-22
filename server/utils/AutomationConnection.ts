@@ -6,8 +6,8 @@ import { mixerGenericConnection } from '../mainClasses'
 //Utils:
 import { IAutomationProtocol, AutomationPresets } from '../constants/AutomationPresets';
 import { IFader } from '../reducers/fadersReducer';
-import { 
-    SET_FADER_LEVEL, 
+import {
+    SET_FADER_LEVEL,
     SET_CHANNEL_LABEL,
     SET_PGM,
     SET_VO,
@@ -262,7 +262,7 @@ export class AutomationConnection {
             } else if (this.checkOscCommand(message.address, this.automationProtocol.fromAutomation
                 .PING)) {
                 let pingValue = state.settings[0].mixerOnline ? message.address.split("/")[2] : 'offline';
-                
+
                 this.sendOutMessage(
                     this.automationProtocol.toAutomation.PONG,
                     0,

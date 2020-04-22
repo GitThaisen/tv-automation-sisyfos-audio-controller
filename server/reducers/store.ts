@@ -6,7 +6,7 @@ import { loadSettings } from '../utils/SettingsStorage'
 let storeRedux = createStore(
     indexReducer
 )
-        
+
 storeRedux.dispatch({
     type:UPDATE_SETTINGS,
     settings: loadSettings(storeRedux.getState())

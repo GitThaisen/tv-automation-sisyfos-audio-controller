@@ -122,7 +122,7 @@ export class MixerGenericConnection {
         if (state.faders[0].fader[faderIndex].pstOn) {
             level = state.faders[0].fader[faderIndex].faderLevel
         } else if (state.faders[0].fader[faderIndex].pstVoOn) {
-            level = state.faders[0].fader[faderIndex].faderLevel * (100-state.settings[0].voLevel)/100 
+            level = state.faders[0].fader[faderIndex].faderLevel * (100-state.settings[0].voLevel)/100
         }
         state.channels[0].channel.map((channel: IChannel, channelIndex: number) => {
             if (faderIndex === channel.assignedFader) {
@@ -227,23 +227,23 @@ export class MixerGenericConnection {
 
     fadeInOut (channelIndex: number, fadeTime: number){
         let faderIndex = state.channels[0].channel[channelIndex].assignedFader
-        if (!state.faders[0].fader[faderIndex].pgmOn 
+        if (!state.faders[0].fader[faderIndex].pgmOn
             && !state.faders[0].fader[faderIndex].voOn
             && state.channels[0].channel[channelIndex].outputLevel === 0
         ) {
-            return               
+            return
         }
         //Clear Old timer or set Fade to active:
         if (state.channels[0].channel[channelIndex].fadeActive) {
             clearInterval(this.fadeActiveTimer[channelIndex]);
             this.clearTimer(channelIndex)
-        } 
+        }
         store.dispatch({
             type:FADE_ACTIVE,
             channel: channelIndex,
             active: true
         });
-        
+
         if (state.faders[0].fader[faderIndex].pgmOn || state.faders[0].fader[faderIndex].voOn) {
             this.fadeUp(channelIndex, fadeTime, faderIndex);
         } else {
@@ -256,7 +256,7 @@ export class MixerGenericConnection {
         let targetVal = state.faders[0].fader[faderIndex].faderLevel;
 
         if (state.faders[0].fader[faderIndex].voOn) {
-            targetVal = targetVal * (100-state.settings[0].voLevel)/100 
+            targetVal = targetVal * (100-state.settings[0].voLevel)/100
         }
         const step: number = (targetVal-outputLevel)/(fadeTime/FADE_INOUT_SPEED);
         const dispatchResolution: number = this.mixerProtocol.FADE_DISPATCH_RESOLUTION*step;
@@ -267,7 +267,7 @@ export class MixerGenericConnection {
             this.timer[channelIndex] = setInterval(() => {
                 outputLevel += step;
                 dispatchTrigger += step;
-                
+
                 if (dispatchTrigger > dispatchResolution) {
                     this.mixerConnection.updateFadeIOLevel(channelIndex, outputLevel);
                     store.dispatch({

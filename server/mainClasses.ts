@@ -14,10 +14,10 @@ if (state.settings[0].enableRemoteFader){
     huiRemoteConnection = new HuiMidiRemoteConnection();
 }
 
-export { 
-    mixerProtocolList, 
-    mixerProtocolPresets, 
-    mixerGenericConnection, 
+export {
+    mixerProtocolList,
+    mixerProtocolPresets,
+    mixerGenericConnection,
     automationConnection,
     huiRemoteConnection
 }

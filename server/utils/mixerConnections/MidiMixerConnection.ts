@@ -19,9 +19,9 @@ import { huiRemoteConnection } from '../../mainClasses'
 import { MixerProtocolPresets } from '../../constants/MixerProtocolPresets';
 import { IMixerProtocol } from '../../constants/MixerProtocolInterface';
 import { SET_OUTPUT_LEVEL } from '../../reducers/channelActions'
-import { 
-    SET_VU_LEVEL, 
-    SET_FADER_LEVEL, 
+import {
+    SET_VU_LEVEL,
+    SET_FADER_LEVEL,
     SET_CHANNEL_LABEL,
     TOGGLE_PGM
 } from '../../reducers/faderActions'
@@ -190,15 +190,15 @@ return true;
 
     updateMuteState(channelIndex: number, muteOn: boolean) {
         return true
-    } 
+    }
 
     updateNextAux(channelIndex: number, level: number) {
         return true
-    } 
+    }
     updateThreshold(channelIndex: number, level: number) {
         return true
     }
-    updateRatio(channelIndex: number, level: number) {        
+    updateRatio(channelIndex: number, level: number) {
         return true
 
     }

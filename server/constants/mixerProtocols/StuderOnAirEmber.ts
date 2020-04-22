@@ -149,7 +149,7 @@ CH 96:7f 8f ff fe d9 5c 80 30 80 a4 19 31 17 a1 15 31 13 bf 60 10 31 0e a6 0c 31
 
         toMixer: {
             CHANNEL_OUT_GAIN: [{
-                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a4 18 31 16 a1 14 31 12 {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00', // '7f 8f ff fe d9 5c 80 30 80 a4 18 31 16 a2 14 31 12 {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00', 
+                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a4 18 31 16 a1 14 31 12 {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00', // '7f 8f ff fe d9 5c 80 30 80 a4 18 31 16 a2 14 31 12 {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00',
                 value: 0,
                 type: 'real',
                 min: 0,
@@ -158,7 +158,7 @@ CH 96:7f 8f ff fe d9 5c 80 30 80 a4 19 31 17 a1 15 31 13 bf 60 10 31 0e a6 0c 31
 
             },
             {
-                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a4 19 31 17 a1 15 31 13 bf {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00', 
+                mixerMessage: '7f 8f ff fe d9 5c 80 30 80 a4 19 31 17 a1 15 31 13 bf {channel} 10 31 0e a6 0c 31 0a e1 08 31 06 63 04 02 02 {level} 00 00 00 00',
                 value: 0,
                 type: 'real',
                 min: 0,

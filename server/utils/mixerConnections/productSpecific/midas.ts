@@ -25,7 +25,7 @@ export const midasMeter = (message: any) => {
             level: level
         })
         socketServer.emit(
-            SOCKET_SET_VU, 
+            SOCKET_SET_VU,
             {
                 faderIndex: state.channels[0].channel[i].assignedFader,
                 level: level
@@ -37,7 +37,7 @@ export const midasMeter = (message: any) => {
             level: reductionLevel
         })
         socketServer.emit(
-            SOCKET_SET_VU_REDUCTION, 
+            SOCKET_SET_VU_REDUCTION,
             {
                 faderIndex: state.channels[0].channel[i].assignedFader,
                 level: reductionLevel

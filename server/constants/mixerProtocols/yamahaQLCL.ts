@@ -10,12 +10,12 @@ export const YamahaQLCL: IMixerProtocol = {
     pingResponseCommand: [emptyMixerMessage()],
     pingTime: 10000,
     initializeCommands: [
-        { 
-            mixerMessage: 'f0 43 30 3e 19 01 00 37 00 00 {channel} f7', 
-            value: 0, 
-            type: '', 
-            min: 0, 
-            max: 1, 
+        {
+            mixerMessage: 'f0 43 30 3e 19 01 00 37 00 00 {channel} f7',
+            value: 0,
+            type: '',
+            min: 0,
+            max: 1,
             zero: 0.75
         }
     ],
