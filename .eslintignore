@@ -4,3 +4,4 @@ scratch
 build
 package-lock.json
 lib
+@types

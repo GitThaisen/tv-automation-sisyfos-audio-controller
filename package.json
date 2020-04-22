@@ -43,7 +43,7 @@
         "validate:dependencies": "yarn audit && yarn license-validate",
         "license-validate": "node-license-validator -p -d --allow-licenses MIT MIT/X11 BSD BSD-3-Clause BSD-2-Clause ISC Apache Apache-2.0 WTFPL CC-BY-3.0 CC0-1.0 Unlicense --allow-packages cycle",
         "lint": "eslint . --ext .js,.ts",
-        "lint:fix": "yarn lint -- --fix",
+        "lint:fix": "yarn lint --fix",
         "eslint": "eslint ./"
     },
     "dependencies": {
