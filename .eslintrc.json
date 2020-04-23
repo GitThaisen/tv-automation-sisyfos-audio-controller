@@ -4,8 +4,10 @@
 	"rules": {
 		"prettier/prettier": "error"
 	},
-	"env": { "es2018": true },
-	"parserOptions": { "sourceType": "module" },
+
+	"parserOptions": { "sourceType": "module",
+			"ecmaVersion": 2018
+	},
 	"overrides": [
 		{
 			"files": ["*.ts"],
@@ -20,7 +22,7 @@
 			]
 		},
 		{
-			"files": ["/test/**/*.ts"],
+			"files": ["test/**/*.ts"],
 			"env": {
 				"jest": true
 			}
