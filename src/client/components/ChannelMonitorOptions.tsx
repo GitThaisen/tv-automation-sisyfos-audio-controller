@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { TOGGLE_SHOW_MONITOR_OPTIONS } from '../../server/reducers/settingsActions'
 import { ISettings } from '../../server/reducers/settingsReducer';
 import { SOCKET_SET_AUX_LEVEL, SOCKET_SET_FADER_MONITOR, SOCKET_SHOW_IN_MINI_MONITOR } from '../../server/constants/SOCKET_IO_DISPATCHERS';
-import { SHOW_IN_MINI_MONITOR } from '../../server/reducers/faderActions';
 
 interface IMonitorSettingsInjectProps {
     label: string,
@@ -32,10 +31,10 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
     }
 
     handleAssignChannel(channel: number, event: any) {
-        if (event.target.checked === false) {  
+        if (event.target.checked === false) {
             if (window.confirm('Remove monitoring on ' + String(channel + 1))) {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_AUX_LEVEL, 
+                window.socketIoClient.emit(
+                    SOCKET_SET_AUX_LEVEL,
                     {
                         channel: channel,
                         auxIndex: this.props.fader[this.faderIndex].monitor - 1,
@@ -45,8 +44,8 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
             }
         } else {
             if (window.confirm('Enable monitoring of Channel ' + String(channel + 1) + '?')) {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_AUX_LEVEL, 
+                window.socketIoClient.emit(
+                    SOCKET_SET_AUX_LEVEL,
                     {
                         channel: channel,
                         auxIndex: this.props.fader[this.faderIndex].monitor - 1,
@@ -59,9 +58,9 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
 
     handleClearMonitorRouting() {
         if (window.confirm('This will remove all monitor assignments to Aux :' + String(this.props.fader[this.faderIndex].monitor))) {
-            this.props.channel.forEach((channel: any, index: number) => {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_AUX_LEVEL, 
+            this.props.channel.forEach((_channel: any, index: number) => {
+                window.socketIoClient.emit(
+                    SOCKET_SET_AUX_LEVEL,
                     {
                         channel: index,
                         auxIndex: this.props.fader[this.faderIndex].monitor - 1,
@@ -74,23 +73,23 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
 
     handleMixMinusRouting() {
         if (window.confirm('Send all channels to Aux: ' + String(this.props.fader[this.faderIndex].monitor))) {
-            this.props.channel.forEach((channel: any, index: number) => {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_AUX_LEVEL, 
+            this.props.channel.forEach((_channel: any, index: number) => {
+                window.socketIoClient.emit(
+                    SOCKET_SET_AUX_LEVEL,
                     {
                         channel: index,
                         auxIndex: this.props.fader[this.faderIndex].monitor - 1,
                         level: 0
                     }
                 )
-            })  
+            })
         }
     }
 
 
     handleShowInMiniMonitor = (event: ChangeEvent<HTMLInputElement>) => {
-        window.socketIoClient.emit( 
-            SOCKET_SHOW_IN_MINI_MONITOR, 
+        window.socketIoClient.emit(
+            SOCKET_SHOW_IN_MINI_MONITOR,
             {
                 faderIndex: this.faderIndex,
                 showInMiniMonitor: event.target.checked
@@ -103,8 +102,8 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
         if (value > this.props.settings.numberOfAux || value < 0) {
             value = -1
         }
-        window.socketIoClient.emit( 
-            SOCKET_SET_FADER_MONITOR, 
+        window.socketIoClient.emit(
+            SOCKET_SET_FADER_MONITOR,
             {
                 faderIndex: this.faderIndex,
                 auxIndex: value
@@ -125,15 +124,15 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
             <div className="channel-monitor-body">
                 <h2>MONITOR ROUTE</h2>
                 <h2>{this.props.label || ("FADER " + (this.faderIndex + 1))}</h2>
-                <button 
+                <button
                     className="close"
                     onClick={() => this.handleClose()}
                 >X</button>
-                <button 
+                <button
                     className="button"
                     onClick={() => this.handleClearMonitorRouting()}
                 >CLEAR ALL</button>
-                <button 
+                <button
                     className="button"
                     onClick={() => this.handleMixMinusRouting()}
                 >ASSIGN ALL</button>
@@ -142,7 +141,7 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
                     MONITOR AUX SEND :
                 </label>
                 <input className="input-field"
-                    value={this.props.fader[this.faderIndex].monitor} 
+                    value={this.props.fader[this.faderIndex].monitor}
                     onChange={(event) => this.handleSetAux(event)}
                 />
                 <br/>
@@ -155,8 +154,8 @@ class ChannelMonitorOptions extends React.PureComponent<IChannelProps & IMonitor
                             onChange={(event) => this.handleShowInMiniMonitor(event)}
                         />
                 <hr />
-                {this.props.channel.map((channel: any, index: number) => {
-                    return <div 
+                {this.props.channel.map((_channel: any, index: number) => {
+                    return <div
                         key={index}
                         className={ClassNames("channel-monitor-text", {
                             'checked': this.props.channel[index].auxLevel[this.props.fader[this.faderIndex].monitor - 1] >= 0 || false

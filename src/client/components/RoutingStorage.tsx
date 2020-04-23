@@ -4,11 +4,11 @@ import '../assets/css/RoutingStorage.css';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
 import { TOGGLE_SHOW_STORAGE } from '../../server/reducers/settingsActions'
-import { 
-    SOCKET_GET_SNAPSHOT_LIST, 
-    SOCKET_LOAD_SNAPSHOT, 
+import {
+    SOCKET_GET_SNAPSHOT_LIST,
+    SOCKET_LOAD_SNAPSHOT,
     SOCKET_SAVE_SNAPSHOT,
-    SOCKET_GET_CCG_LIST, 
+    SOCKET_GET_CCG_LIST,
     SOCKET_SAVE_CCG_FILE
 } from '../../server/constants/SOCKET_IO_DISPATCHERS';
 
@@ -38,7 +38,7 @@ class Storage extends React.PureComponent<IStorageProps & Store> {
 			type: TOGGLE_SHOW_STORAGE
 		});
     }
-    
+
     saveFile() {
         let fileName = window.prompt('Enter filename :', 'newfile')
         if (window.confirm('Are you sure you will save ' + fileName + ' as new routing setup?'))
@@ -116,7 +116,7 @@ class Storage extends React.PureComponent<IStorageProps & Store> {
                         <hr/>
                         <h3>LOAD CASPARCG :</h3>
                         <this.ListCcgFiles/>
-                    </div> 
+                    </div>
                     : null
                 }
             </div>
@@ -125,7 +125,7 @@ class Storage extends React.PureComponent<IStorageProps & Store> {
 
 }
 
-const mapStateToProps = (state: any, props: any): any => {
+const mapStateToProps = (_state: any, props: any): any => {
     return {
         load: props.load,
         save: props.save

@@ -20,7 +20,7 @@ const selectorColorStyles = {
             ...styles, backgroundColor: '#676767', color: 'white', border: 0, width: 500, marginLeft: 100
         }
     ),
-    option: (styles: any) => {
+    option: () => {
         return {
             backgroundColor: '#AAAAAA',
             color: 'white'
@@ -143,7 +143,7 @@ class Settings extends React.PureComponent<IAppProps & Store, IState> {
     }
 
     handleShowAllChannels = () => {
-        this.props.store.channels[0].channel.map((channel: any, index: number) => {
+        this.props.store.channels[0].channel.map((_channel: any, index: number) => {
             this.props.dispatch({
                 type: SHOW_CHANNEL,
                 channel: index,
@@ -154,7 +154,7 @@ class Settings extends React.PureComponent<IAppProps & Store, IState> {
 
 
     handleHideAllChannels = () => {
-        this.props.store.channels[0].channel.map((channel: any, index: number) => {
+        this.props.store.channels[0].channel.map((_channel: any, index: number) => {
             this.props.dispatch({
                 type: SHOW_CHANNEL,
                 channel: index,

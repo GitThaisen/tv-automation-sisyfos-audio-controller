@@ -33,10 +33,10 @@ class ChannelRouteSettings extends React.PureComponent<IChannelProps & IChannelS
         if (event.target.checked === false) {
             console.log('Unbinding Channel')
             if (window.confirm('Unbind Channel ' + String(channel + 1) + ' from Fader ' + String(this.faderIndex + 1))) {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_ASSIGNED_FADER, 
+                window.socketIoClient.emit(
+                    SOCKET_SET_ASSIGNED_FADER,
                     {
-                        channel: channel, 
+                        channel: channel,
                         faderAssign: -1
                     }
                 )
@@ -44,10 +44,10 @@ class ChannelRouteSettings extends React.PureComponent<IChannelProps & IChannelS
         } else {
             console.log('Binding Channel')
             if (window.confirm('Bind Channel ' + String(channel + 1) + ' to Fader ' + String(this.faderIndex + 1) + '?')) {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_ASSIGNED_FADER, 
+                window.socketIoClient.emit(
+                    SOCKET_SET_ASSIGNED_FADER,
                     {
-                        channel: channel, 
+                        channel: channel,
                         faderAssign: this.faderIndex
                     }
                 )
@@ -57,11 +57,11 @@ class ChannelRouteSettings extends React.PureComponent<IChannelProps & IChannelS
 
     handleClearRouting() {
         if (window.confirm('REMOVE ALL FADER ASSIGNMENTS????')) {
-            this.props.channel.forEach((channel: any, index: number) => {
-                window.socketIoClient.emit( 
-                    SOCKET_SET_ASSIGNED_FADER, 
+            this.props.channel.forEach((_channel: any, index: number) => {
+                window.socketIoClient.emit(
+                    SOCKET_SET_ASSIGNED_FADER,
                     {
-                        channel: index, 
+                        channel: index,
                         faderAssign: -1
                     }
                 )
@@ -71,12 +71,12 @@ class ChannelRouteSettings extends React.PureComponent<IChannelProps & IChannelS
 
     handle11Routing() {
         if (window.confirm('Reassign all Faders 1:1 to Channels????')) {
-            this.props.fader.forEach((fader: any, index: number) => {
-                if (this.props.channel.length > index) {                
-                    window.socketIoClient.emit( 
-                        SOCKET_SET_ASSIGNED_FADER, 
+            this.props.fader.forEach((_fader: any, index: number) => {
+                if (this.props.channel.length > index) {
+                    window.socketIoClient.emit(
+                        SOCKET_SET_ASSIGNED_FADER,
                         {
-                            channel: index, 
+                            channel: index,
                             faderAssign: index
                         }
                     )
@@ -96,21 +96,21 @@ class ChannelRouteSettings extends React.PureComponent<IChannelProps & IChannelS
         return (
             <div className="channel-route-body">
                 <h2>{this.props.label || ("FADER " + (this.faderIndex + 1))}</h2>
-                <button 
+                <button
                     className="close"
                     onClick={() => this.handleClose()}
                 >X</button>
-                <button 
+                <button
                     className="button"
                     onClick={() => this.handleClearRouting()}
                 >CLEAR ALL</button>
-                <button 
+                <button
                     className="button"
                     onClick={() => this.handle11Routing()}
                 >ROUTE 1:1</button>
                 <hr />
-                {this.props.channel.map((channel: any, index: number) => {
-                    return <div 
+                {this.props.channel.map((_channel: any, index: number) => {
+                    return <div
                         key={index}
                         className={ClassNames("channel-route-text", {
                             'checked': this.props.channel[index].assignedFader === this.faderIndex

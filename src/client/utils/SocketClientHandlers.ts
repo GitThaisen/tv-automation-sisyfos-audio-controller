@@ -20,7 +20,7 @@ import {
 	SOCKET_SET_VU_REDUCTION
 } from '../../server/constants/SOCKET_IO_DISPATCHERS'
 
-export const socketClientHandlers = () => {
+export const socketClientHandlers = (): void => {
 	window.socketIoClient
 		.on('connect', () => {
 			window.storeRedux.dispatch({
@@ -41,7 +41,7 @@ export const socketClientHandlers = () => {
 
 			const numberOfChannels: number[] = []
 			if (window.mixerProtocol) {
-				window.mixerProtocol.channelTypes.forEach((item: any, index: number) => {
+				window.mixerProtocol.channelTypes.forEach((_item: any, index: number) => {
 					numberOfChannels.push(payload.settings[0].numberOfChannelsInType[index])
 				})
 				window.storeRedux.dispatch({

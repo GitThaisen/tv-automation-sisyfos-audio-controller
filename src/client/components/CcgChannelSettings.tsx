@@ -28,7 +28,7 @@ class CcgChannelInputSettings extends React.PureComponent<IChannelProps & IChann
 	}
 
 	handleOption = (prop: string, option: string) => {
-		window.socketIoClient.emit( SOCKET_SET_INPUT_OPTION, 
+		window.socketIoClient.emit( SOCKET_SET_INPUT_OPTION,
             {
                 channel: this.props.channelIndex,
 				prop: prop,

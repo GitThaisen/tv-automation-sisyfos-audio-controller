@@ -73,12 +73,12 @@ class App extends React.Component<IAppProps> {
     render() {
         return (
         <div>
-            {!this.props.store.settings[0].serverOnline ? 
+            {!this.props.store.settings[0].serverOnline ?
                 <div className="server-offline">
                     TRYING TO CONNECT TO SISYFOS SERVER
-                </div> 
+                </div>
             :
-                 null 
+                 null
             }
             {!window.location.search.includes('minimonitor=1') ? <Channels /> : null }
             {window.location.search.includes('minimonitor=1') ? <MiniChannels /> : null }

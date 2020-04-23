@@ -19,7 +19,7 @@ import { ISettings } from '../../server/reducers/settingsReducer';
 import { SOCKET_NEXT_MIX, SOCKET_CLEAR_PST, SOCKET_RESTART_SERVER } from '../../server/constants/SOCKET_IO_DISPATCHERS';
 
 interface IChannelsInjectProps {
-    channels: IChannels 
+    channels: IChannels
     faders: IFader[]
     settings: ISettings
 }
@@ -31,7 +31,7 @@ class Channels extends React.Component<IChannelsInjectProps & Store> {
     }
 
     public shouldComponentUpdate(nextProps: IChannelsInjectProps) {
-        return this.props.settings.showOptions !== nextProps.settings.showOptions 
+        return this.props.settings.showOptions !== nextProps.settings.showOptions
         || this.props.settings.showChanStrip !== nextProps.settings.showChanStrip
         || this.props.settings.showMonitorOptions !== nextProps.settings.showMonitorOptions
         || this.props.settings.mixerOnline !== nextProps.settings.mixerOnline
@@ -87,7 +87,7 @@ class Channels extends React.Component<IChannelsInjectProps & Store> {
                 :
                 null
             }
-            {this.props.faders.map((none: any, index: number) => {
+            {this.props.faders.map((_none: any, index: number) => {
                 return <Channel
                             faderIndex = {index}
                             key={index}
@@ -121,7 +121,7 @@ class Channels extends React.Component<IChannelsInjectProps & Store> {
                     RESTART SERVER
                 </button>
                 }
-                
+
                 {window.location.search.includes('settings=0') ?
                 null :
                 <button

@@ -4,21 +4,21 @@ import ReactSlider from 'react-slider'
 import '../assets/css/ChanStrip.css';
 import { Store } from 'redux';
 import { connect } from 'react-redux';
-import { 
+import {
     TOGGLE_SHOW_CHAN_STRIP,
     TOGGLE_SHOW_OPTION,
     TOGGLE_SHOW_MONITOR_OPTIONS
  } from '../../server/reducers/settingsActions'
 import { IFader } from '../../server/reducers/fadersReducer'
-import { 
-    SOCKET_SET_THRESHOLD, 
+import {
+    SOCKET_SET_THRESHOLD,
     SOCKET_SET_RATIO,
-    SOCKET_SET_DELAY_TIME, 
-    SOCKET_SET_LOW, 
-    SOCKET_SET_LO_MID, 
-    SOCKET_SET_MID, 
-    SOCKET_SET_HIGH, 
-    SOCKET_SET_AUX_LEVEL 
+    SOCKET_SET_DELAY_TIME,
+    SOCKET_SET_LOW,
+    SOCKET_SET_LO_MID,
+    SOCKET_SET_MID,
+    SOCKET_SET_HIGH,
+    SOCKET_SET_AUX_LEVEL
 } from '../../server/constants/SOCKET_IO_DISPATCHERS';
 import CcgChannelInputSettings from './CcgChannelSettings';
 import ReductionMeter from './ReductionMeter';
@@ -51,7 +51,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         this.props.dispatch({
             type: TOGGLE_SHOW_CHAN_STRIP,
             channel: -1
-        }); 
+        });
 
     }
 
@@ -74,7 +74,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     handleThreshold(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_THRESHOLD, 
+        window.socketIoClient.emit( SOCKET_SET_THRESHOLD,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -82,7 +82,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         )
     }
     handleRatio(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_RATIO, 
+        window.socketIoClient.emit( SOCKET_SET_RATIO,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -91,7 +91,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     handleDelay(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_DELAY_TIME, 
+        window.socketIoClient.emit( SOCKET_SET_DELAY_TIME,
             {
                 channel: this.props.faderIndex,
                 delayTime: parseFloat(event)
@@ -100,7 +100,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     changeDelay(currentValue: number, addValue: number) {
-        window.socketIoClient.emit( SOCKET_SET_DELAY_TIME, 
+        window.socketIoClient.emit( SOCKET_SET_DELAY_TIME,
             {
                 channel: this.props.faderIndex,
                 delayTime: currentValue + addValue
@@ -109,7 +109,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     handleLow(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_LOW, 
+        window.socketIoClient.emit( SOCKET_SET_LOW,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -118,7 +118,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     handleLoMid(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_LO_MID, 
+        window.socketIoClient.emit( SOCKET_SET_LO_MID,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -127,7 +127,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
     }
 
     handleMid(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_MID, 
+        window.socketIoClient.emit( SOCKET_SET_MID,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -135,7 +135,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         )
     }
     handleHigh(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_HIGH, 
+        window.socketIoClient.emit( SOCKET_SET_HIGH,
             {
                 channel: this.props.faderIndex,
                 level: parseFloat(event)
@@ -143,8 +143,8 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         )
     }
     handleMonitorLevel(event: any, channelIndex: number) {
-        window.socketIoClient.emit( 
-            SOCKET_SET_AUX_LEVEL, 
+        window.socketIoClient.emit(
+            SOCKET_SET_AUX_LEVEL,
             {
                 channel: channelIndex,
                 auxIndex: this.props.auxSendIndex,
@@ -157,7 +157,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 Threshold
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -179,7 +179,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 Ratio
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -243,7 +243,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                 </div>
                 <div className="parameter-text">
                     {Math.round(500*(this.props.fader[this.props.faderIndex].delayTime || 0))} ms
-                    <ReactSlider 
+                    <ReactSlider
                         className="chan-strip-fader"
                         thumbClassName = "chan-strip-thumb"
                         orientation = "vertical"
@@ -265,7 +265,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 Low
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -286,7 +286,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 Lo-Mid
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -307,7 +307,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 Hi-Mid
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -328,7 +328,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <div className="parameter-text">
                 High
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -355,7 +355,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
         return (
             <li key={channelIndex}>
                 {monitorName}
-                <ReactSlider 
+                <ReactSlider
                     className="chan-strip-fader"
                     thumbClassName = "chan-strip-thumb"
                     orientation = "vertical"
@@ -420,7 +420,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                         {this.props.channel.map((ch: any, index: number) => {
                             if (ch.auxLevel[this.props.auxSendIndex] >= 0) {
                                 return this.monitor(index)
-                            } 
+                            }
                         })}
                     </ul>
                 </div>
@@ -436,7 +436,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                 <div className="chan-strip-body">
                     <div className="header">
                         {this.props.label || ("FADER " + (this.props.faderIndex + 1))}
-                        <button 
+                        <button
                                 className="close"
                                 onClick={() => this.handleClose()}
                             >X
@@ -446,7 +446,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                     <div className="header">
                         {window.location.search.includes('settings=0') ?
                         null :
-                            <button 
+                            <button
                                 className="button"
                                 onClick={() => this.handleShowRoutingOptions()}
                                 >CHANNEL ROUTING
@@ -454,7 +454,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                         }
                         {window.location.search.includes('settings=0') ?
                             null :
-                            <button 
+                            <button
                                 className="button"
                                 onClick={() => this.handleShowMonitorOptions()}
                                 >MONITOR ROUTING
@@ -465,7 +465,7 @@ class ChanStrip extends React.PureComponent<IChanStripProps & IChanStripInjectPr
                     {this.props.selectedProtocol.includes("caspar") ?
                         <CcgChannelInputSettings channelIndex={this.props.faderIndex} />
                     :
-                        this.parameters() 
+                        this.parameters()
                     }
                 </div>
             )
@@ -499,7 +499,7 @@ const mapStateToProps = (state: any, props: any): IChanStripInjectProps => {
             auxSendIndex: state.faders[0].fader[props.faderIndex].monitor - 1,
             offtubeMode: state.settings[0].offtubeMode
         }
-    } 
+    }
     return inject
 }
 

@@ -9,10 +9,6 @@ export interface IReductionMeterInjectedProps {
     reductionVal: number
 }
 
-interface IVuMeterProps {
-    faderIndex: number
-}
-
 export class ReductionMeter extends React.Component<IReductionMeterInjectedProps> {
     canvas: HTMLCanvasElement | undefined
 
@@ -55,7 +51,7 @@ export class ReductionMeter extends React.Component<IReductionMeterInjectedProps
         if (val >= window.mixerProtocol.meter.test) {
             val = window.mixerProtocol.meter.test
         }
-        return this.totalHeight() * val 
+        return this.totalHeight() * val
     }
 
     calcMiddle = () => {

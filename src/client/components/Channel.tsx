@@ -16,7 +16,7 @@ import { ISettings } from '../../server/reducers/settingsReducer';
 import { TOGGLE_SHOW_CHAN_STRIP } from '../../server/reducers/settingsActions';
 
 interface IChannelInjectProps {
-    channels: IChannels 
+    channels: IChannels
     fader: IFader
     settings: ISettings
     channelType: number,
@@ -79,7 +79,7 @@ class Channel extends React.Component<IChannelProps & IChannelInjectProps & Stor
     }
 
     handleLevel(event: any) {
-        window.socketIoClient.emit( SOCKET_SET_FADERLEVEL, 
+        window.socketIoClient.emit( SOCKET_SET_FADERLEVEL,
             {
                 'faderIndex' :this.faderIndex,
                 'level': parseFloat(event)
@@ -95,26 +95,26 @@ class Channel extends React.Component<IChannelProps & IChannelInjectProps & Stor
 
     fader() {
         return (
-            <Nouislider 
+            <Nouislider
                 className={
                     ClassNames(
                         {
                             'channel-volume-fader': true,
-                            "noUi-vertical": true, 
+                            "noUi-vertical": true,
                         }
                     )
                 }
                 orientation="vertical"
                 direction='rtl'
                 animate={false}
-                range={{ min: 0, max: 1 }} 
-                start={[this.props.fader.faderLevel]} 
+                range={{ min: 0, max: 1 }}
+                start={[this.props.fader.faderLevel]}
                 step={0.01}
                 connect
                 onSlide={(event: any) => {
                     this.handleLevel(event);
                 }}
-                
+
             />
         )
     }
@@ -172,11 +172,11 @@ class Channel extends React.Component<IChannelProps & IChannelInjectProps & Stor
                     'on': this.props.fader.pstOn,
                     'vo': this.props.fader.pstVoOn
                 })}
-                onClick={event => {
+                onClick={() => {
                     this.handlePst();
                 }}
             >
-            {this.props.settings.automationMode ? 
+            {this.props.settings.automationMode ?
                 <React.Fragment>
                     CUE NEXT
                 </React.Fragment>
@@ -195,7 +195,7 @@ class Channel extends React.Component<IChannelProps & IChannelInjectProps & Stor
                 className={ClassNames("channel-strip-button", {
                     'on': this.props.settings.showChanStrip
                 })}
-                onClick={event => {
+                onClick={() => {
                     this.handleShowChanStrip();
                 }}
             >
@@ -210,7 +210,7 @@ class Channel extends React.Component<IChannelProps & IChannelInjectProps & Stor
                 className={ClassNames("channel-pst-button", {
                     'on': this.props.fader.pflOn
                 })}
-                onClick={event => {
+                onClick={() => {
                     this.handlePfl();
                 }}
             >PFL</button>

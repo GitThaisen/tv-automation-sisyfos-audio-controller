@@ -13,7 +13,7 @@ import { ISettings } from '../../server/reducers/settingsReducer';
 import { TOGGLE_SHOW_CHAN_STRIP } from '../../server/reducers/settingsActions';
 
 interface IChannelInjectProps {
-    channels: IChannels 
+    channels: IChannels
     fader: IFader
     settings: ISettings
     channelType: number,
@@ -54,7 +54,7 @@ class MiniChannel extends React.Component<IChannelProps & IChannelInjectProps & 
                 className={ClassNames("monitor-channel-strip-button", {
                     'on': (this.props.settings.showChanStrip === this.props.channelTypeIndex)
                 })}
-                onClick={event => {
+                onClick={() => {
                     this.handleShowChanStrip();
                 }}
             >

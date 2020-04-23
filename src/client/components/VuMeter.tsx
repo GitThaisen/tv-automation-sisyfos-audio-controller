@@ -10,9 +10,6 @@ export interface IVuMeterInjectedProps {
     vuVal: number
 }
 
-interface IVuMeterProps {
-    faderIndex: number
-}
 
 export class VuMeter extends React.PureComponent<IVuMeterInjectedProps> {
     canvas: HTMLCanvasElement | undefined;
